@@ -1,0 +1,130 @@
+Raspberry Pi - Smart Home Hub - Sonoff Mini + Sonoff Basic - Tasmota Home Assistant - Mosquitto - Node-Red
+*************************************************************************************************************************************************************************
+USEFUL COMMANDS :: sudo shutdown -h now | sudo raspi-config | mkdir name-here [new directory/folder] | sudo chmod +x [execute file]
+*************************************************************************************************************************************************************************
+OS: Raspbian Buster - updated + upgraded [filelocation: mydocuments: coding: raspberry pi: zz Pi 0 W: Raspbian Buster [10-07-2019]:: 2019-07-10-raspbian-buster-full.img
+username: pi
+password: ***********
+*************************************************************************************************************************************************************************
+Auto-Hotspot
+10.10.10.10
+terminal command :: hostname -I [HOTSPOT IP address]
+
+terminal command :: ip neigh show dev wlan0 [IP addresses for all connected devices connected to HOTSPOT]
+
+change SSID & PSK - this is what Rpi tries connecting to initially - HOME ROUTER
+sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+
+HOTSPOT :: AM1924 | Passphrase :: ************* :: [Hotspot is created if Rpi can't connect to network stored inside wpa_supplicant.conf]
+sudo nano /etc/hostapd/hostapd.conf
+
+TUTORIAL ::
+Easy as Pi Access Point WIFI hotspot :: https://www.youtube.com/watch?v=qMT-0mz1lkI
+*************************************************************************************************************************************************************************
+Mosquitto
+username: pi
+password: zerog2
+
+TUTORIAL ::
+Setup Raspberry Pi as a MQTT Broker | Install Mosquitto on Raspberry Pi :: https://www.youtube.com/watch?v=Ce2Djxx9shU
+https://pastebin.com/Etn59ppp
+*************************************************************************************************************************************************************************
+Sonoff Devices :: Sonoff MINI + Sonoff Basic
+
+powered devices :: neutral + live [plug]
+connected to eweLink app
+update firmware to v3.3
+disconneted power + dismantled devices + place provided jumper over input pins :: DIY Mode
+changed RPi Hotspot SSID name to sonoffDiy + PASSPHRASE to 20170618sn [sudo nano /etc/hostapd/hostapd.conf]
+repowered devices auto connected to above AccessPoint
+connected laptop to Rpi AccessPoint Hotspot
+Opened DIY Tool [github Sonoff DIY]
+Sonnoff devices appeared - selected both in this case
+changed SSID [bottom right corner] to VM router settings [dialog box confirmed success]
+FIRMWARE FLASH [top right]
+selected firmware [dialog box] - sonoff-basic.bin
+selected device from dropdown
+reflashed device [status bar 0%>>>100%]
+devices will appear in Network [connect to devices]
+
+:: Configured devices ::
+MQTT credentials are same as those setup with Mosquitto - basically granting the Sonoff device access to the Mosquitto local server
+user: pi password: zerog2
+
+TUTORIAL ::
+Sonoff Mini Finally! The Smart Switch we've been waiting for! w/ Tasmota for Home Assistant esphome :: 
+> https://www.youtube.com/watch?v=9fkYBWvwn4A
+
+Tasmota ::
+Setting up the Sonoff Tasmota MQTT Switch :: https://stevessmarthomeguide.com/setting-up-the-sonoff-tasmota-mqtt-switch/
+The COMPLETE Guide to Tasmota 2019 :: https://www.youtube.com/watch?v=08_GBROKQH0
+Sonoff Basic Expansion Mod - Buttons, PIR Motion Sensors, Tasmota Rules and more! :: https://www.youtube.com/watch?v=WsatPkC2Hf0
+
+***SPECIAL***
+Trigger a flow if a message isn’t received after a defined time :: https://cookbook.nodered.org/basic/trigger-timeout
+
+USEFUL TASMOTA COMMANDS
+
+*************************************************************************************************************************************************************************
+Node-Red
+Running on Raspberry Pi :: https://nodered.org/docs/getting-started/raspberrypi
+
+Install Node-Red using provided script ::
+termianl command :: bash <(curl -sL https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered)
+
+Autostart on boot
+terminal command :: sudo systemctl enable nodered.service
+
+Install dashboard nodes
+Install Sonoff nodes
+
+MQTT INPUT
+Name: Mosquitto
+Connection Tab
+Server: localhost	Port: 1883
+
+Security Tab [Mosquitto credentials :: setup when confirguring Mosquitto]
+user: pi
+password: zerog2
+
+TUTORIAL ::
+How to flash Tasmota firmware to Sonoff Basic :: https://www.youtube.com/watch?v=pVPPiYAo8NI
+*************************************************************************************************************************************************************************
+FRAME BUFFER - FORCES DISPLAY OUTPUT SIZE IF HDMI IS NOT CONNECTED - FOR VNC
+[terminal console]
+
+cd /
+ls
+cd /boot
+sudo nano config.txt [ctrl x to exit - y to save - return]
+sudo reboot
+
+uncomment frame buffer width height
+framebuffer_width=1280
+framebuffer_height=720
+
+THREAD
+Re: Set VNC resolution? :: https://www.raspberrypi.org/forums/viewtopic.php?t=200196
+*************************************************************************************************************************************************************************
+Running VNCServer at Startup :: https://learn.adafruit.com/adafruit-raspberry-pi-lesson-7-remote-control-with-vnc/running-vncserver-at-startup
+
+cd /home/pi
+cd .config
+mkdir autostart
+cd autostart
+nano tightvnc.desktop
+
+-add this to empty file-
+
+[Desktop Entry]
+Type=Application
+Name=TightVNC
+Exec=vncserver :1
+StartupNotify=false
+*************************************************************************************************************************************************************************
+BONUS TIME/DATE
+
+Node Red: A widget based dashboard working with Homey trough MQTT
+https://community.athom.com/t/node-red-a-widget-based-dashboard-working-with-homey-trough-mqtt/18798/3
+
+How send current date and time to mqtt topic? #4734 :: https://github.com/arendst/Tasmota/issues/4734

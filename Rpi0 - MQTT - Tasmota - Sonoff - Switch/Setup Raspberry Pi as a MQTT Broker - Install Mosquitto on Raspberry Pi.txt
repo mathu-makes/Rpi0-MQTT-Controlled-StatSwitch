@@ -1,0 +1,35 @@
+1. Install Mosquitto
+sudo apt-get install mosquitto -y
+sudo apt-get install mosquitto-clients
+ 
+2. Configure Mosquitto.
+a. Run the following
+sudo nano /etc/mosquitto/mosquitto.conf
+ 
+b. Paste the following:
+# Place your local configuration in /etc/mosquitto/conf.d/
+#
+# A full description of the configuration file is at
+# /usr/share/doc/mosquitto/examples/mosquitto.conf.example
+ 
+pid_file /var/run/mosquitto.pid
+ 
+persistence true
+persistence_location /var/lib/mosquitto/
+ 
+log_dest file /var/log/mosquitto/mosquitto.log
+ 
+allow_anonymous false
+password_file /etc/mosquitto/pwfile
+listener 1883
+ 
+3. Setup Mosquitto credentials
+sudo mosquitto_passwd -c /etc/mosquitto/pwfile TYPE_YOUR_USERNAME_HERE
+ 
+4. Test the Mosquitto by subscribing to a topic
+mosquitto_sub -d -u MOSQUITTO_USERNAME -P MOSQUITTO_PASSWORD -t dev/test
+
+***************************************************************************************************
+TUTORIAL ::
+Setup Raspberry Pi as a MQTT Broker | Install Mosquitto on Raspberry Pi :: https://www.youtube.com/watch?v=Ce2Djxx9shU
+https://pastebin.com/Etn59ppp

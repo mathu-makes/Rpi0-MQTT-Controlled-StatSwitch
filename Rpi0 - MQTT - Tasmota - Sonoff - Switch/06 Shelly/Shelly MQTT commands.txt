@@ -1,0 +1,14 @@
+Shelly1/1PM: MQTT
+Shelly1 and Shelly1PM uses the following topics, where <model> is either shelly1 or shelly1pm:
+
+shellies/<model>-<deviceid>/relay/0 to report status: on or off
+shellies/<model>-<deviceid>/relay/0/command accepts on and off and applies accordingly
+shellies/<model>-<deviceid>/input/0 reports the state of SW terminal
+shellies/<model>-<deviceid>/longpush/0 reports "longpush" state as 0 or 1
+
+
+shellies/shelly1-767E2C - thermostat-switch
+shellie/shelly1-770B40 - boiler-switch
+
+MQTT
+https://shelly-api-docs.shelly.cloud/#shelly1-1pm-mqtt
