@@ -10,4 +10,6 @@ This project helped in my learning to:
     use the command line to install libraries such as Mosquitto
     design a MQTT flow using Node-Red
     understand Tasmota firmware for home automation
-    
+
+Node-Red MQTT flow
+![GitHub Logo](/images/Node-Red_flow.jpg)
