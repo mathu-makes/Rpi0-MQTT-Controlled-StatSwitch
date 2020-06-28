@@ -1,7 +1,7 @@
-# Rpi0-MQTT-Controlled-LightSwitch
+# Rpi0-MQTT-Controlled-ThermostatSwitch
 Rpi0 Access Point + MQTT broker for remote Sonoff control
 
-Goal of project was to modify commercially available Sonoff WiFi smart switch devices and allow for local MQTT switching rather than via Sonoff cloud service.
+Goal of project was to modify commercially available Sonoff WiFi smart switch devices and allow for local MQTT switching rather than via Sonoff cloud service. The intended use of the project was to act as thermostat switch for a boiler.
 This project helped in my learning to:
 
     download and install Raspbian to the Rpi0
