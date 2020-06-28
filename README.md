@@ -6,6 +6,7 @@ This project helped in my learning to:
 
     download and install Raspbian to the Rpi0
     update and upgrade the pi via the command line
+    follow guides to setup pi as WiFi access-point
     use the command line to install libraries such as Mosquitto
     design a MQTT flow using Node-Red
     understand Tasmota firmware for home automation
